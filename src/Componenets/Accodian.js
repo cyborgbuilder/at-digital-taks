@@ -8,53 +8,24 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import Fade from '@mui/material/Fade';
 
 export default function AccordionTransition() {
-  const [expanded, setExpanded] = React.useState(false);
 
-  const handleExpansion = () => {
-    setExpanded((prevExpanded) => !prevExpanded);
-  };
+  const [expandedPanel, setExpandedPanel] = React.useState(false);
+
+  const handleExpansion = (panel) => (event, isExpanded) => {
+    setExpandedPanel(isExpanded ? panel : false);
+  }
 
   return (
-    <div style={{ width: '100%' }}> {/* Ensure the parent div also spans 100% width */}
+    <div style={{ width: '100%' }}> 
       <Accordion
-        expanded={expanded}
-        onChange={handleExpansion}
+        expanded={expandedPanel === 'panel1'}
+        onChange={handleExpansion('panel1')}
         TransitionComponent={Fade}
         TransitionProps={{ timeout: 400 }}
-        sx={{
-          width: '100%', // Add this line
-          '& .MuiAccordion-root': { width: '100%' }, // Ensure Accordion's root also spans 100%
-          '& .MuiAccordion-region': { height: expanded ? 'auto' : 0 },
-          '& .MuiAccordionDetails-root': { display: expanded ? 'block' : 'none' },
-        }}
+        sx={{ width: '100%' }}
       >
         <AccordionSummary
-          expandIcon={expanded ? <RemoveIcon /> : <AddIcon />}
-          aria-controls="panel1-content"
-          id="panel1-header"
-        >
-          <Typography>What is Webflow and why is it the best website builder?</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-          Vitae congue eu consequat ac felis placerat vestibulum lectus mauris ultrices. Cursus sit amet dictum sit amet justo donec enim diam porttitor lacus luctus accumsan tortor posuere.
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
-      <Accordion
-        expanded={expanded}
-        onChange={handleExpansion}
-        TransitionComponent={Fade}
-        TransitionProps={{ timeout: 400 }}
-        sx={{
-          width: '100%', // Add this line
-          '& .MuiAccordion-root': { width: '100%' }, // Ensure Accordion's root also spans 100%
-          '& .MuiAccordion-region': { height: expanded ? 'auto' : 0 },
-          '& .MuiAccordionDetails-root': { display: expanded ? 'block' : 'none' },
-        }}
-      >
-        <AccordionSummary
-          expandIcon={expanded ? <RemoveIcon /> : <AddIcon />}
+          expandIcon={expandedPanel === 'panel1' ? <RemoveIcon /> : <AddIcon />}
           aria-controls="panel1-content"
           id="panel1-header"
         >
@@ -68,21 +39,37 @@ export default function AccordionTransition() {
       </Accordion>
 
       <Accordion
-        expanded={expanded}
-        onChange={handleExpansion}
+        expanded={expandedPanel === 'panel2'}
+        onChange={handleExpansion('panel2')}
         TransitionComponent={Fade}
         TransitionProps={{ timeout: 400 }}
-        sx={{
-          width: '100%', 
-          '& .MuiAccordion-root': { width: '100%' }, 
-          '& .MuiAccordion-region': { height: expanded ? 'auto' : 0 },
-          '& .MuiAccordionDetails-root': { display: expanded ? 'block' : 'none' },
-        }}
+        sx={{ width: '100%' }}
       >
         <AccordionSummary
-          expandIcon={expanded ? <RemoveIcon /> : <AddIcon />}
-          aria-controls="panel1-content"
-          id="panel1-header"
+          expandIcon={expandedPanel === 'panel2' ? <RemoveIcon /> : <AddIcon />}
+          aria-controls="panel2-content"
+          id="panel2-header"
+        >
+          <Typography>What is Webflow and why is it the best website builder?</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography>
+          Vitae congue eu consequat ac felis placerat vestibulum lectus mauris ultrices. Cursus sit amet dictum sit amet justo donec enim diam porttitor lacus luctus accumsan tortor posuere.
+          </Typography>
+        </AccordionDetails>
+      </Accordion>
+
+      <Accordion
+        expanded={expandedPanel === 'panel2'}
+        onChange={handleExpansion('panel2')}
+        TransitionComponent={Fade}
+        TransitionProps={{ timeout: 400 }}
+        sx={{ width: '100%' }}
+      >
+        <AccordionSummary
+          expandIcon={expandedPanel === 'panel2' ? <RemoveIcon /> : <AddIcon />}
+          aria-controls="panel2-content"
+          id="panel2-header"
         >
           <Typography>What is Webflow and why is it the best website builder?</Typography>
         </AccordionSummary>
